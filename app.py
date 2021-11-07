@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = os.urandom(32)
 
 
 @app.route('/')
-def hello_world():
+def home():
     return render_template('home.html')
 
 
