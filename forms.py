@@ -9,4 +9,4 @@ class AddMoviesForm(Form):
         choices=[('action', 'Action'), ('comedy', 'Comedy'), ('horror', 'Horror'), ('romance', 'Romance')],
         validators=[DataRequired()])
 
-    submit = SubmitField('Submit Suggestion')
+    submit = SubmitField('Submit Movie')
