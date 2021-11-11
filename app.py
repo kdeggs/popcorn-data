@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
 from forms import AddMoviesForm
-from sql import new_movie
+from sql import new_movie, get_all_movies
 
 load_dotenv()
 
@@ -59,9 +59,11 @@ def add_movie():
     return render_template('add_movie.html', form=form)
 
 
-@app.route('/all', methods=['GET', 'POST'])
+@app.route('/all', methods=['GET'])
 def all_movies():
-    return render_template('all_movies.html')
+    query_results = db.engine.execute(get_all_movies)
+
+    return render_template('all_movies.html', query_results=query_results)
 
 
 if __name__ == '__main__':
