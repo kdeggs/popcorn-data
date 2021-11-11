@@ -6,3 +6,4 @@ Flask-WTF
 WTForms~=2.1
 gunicorn
 python-dotenv~=0.19.1
+psycopg2
