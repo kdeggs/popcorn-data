@@ -5,8 +5,10 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
-load_dotenv()
 from forms import AddMoviesForm
+from sql import new_movie
+
+load_dotenv()
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -40,15 +42,26 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/all', methods=['GET', 'POST'])
-def allMovies():
-    return render_template('allmovies.html')
-
-
 @app.route('/add', methods=['GET', 'POST'])
-def addMovie():
+def add_movie():
     form = AddMoviesForm()
-    return render_template('addmovie.html', form=form)
+
+    if form.validate_on_submit():
+        db.engine.execute(
+            new_movie,
+            name=form.name.data,
+            description=form.description.data,
+            genre=int(form.genre.data)
+        )
+
+        return render_template('home.html')
+
+    return render_template('add_movie.html', form=form)
+
+
+@app.route('/all', methods=['GET', 'POST'])
+def all_movies():
+    return render_template('all_movies.html')
 
 
 if __name__ == '__main__':

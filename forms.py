@@ -1,12 +1,14 @@
-from wtforms import StringField, SelectField, SubmitField, TextAreaField, Form
-from wtforms.validators import DataRequired, Regexp
+from flask_wtf import FlaskForm
+from wtforms import StringField, SelectField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired
 
 
-class AddMoviesForm(Form):
-    name = StringField('Suggested Movie', validators=[DataRequired()])
-    description = TextAreaField('Write description of movie here: ')
+class AddMoviesForm(FlaskForm):
+    name = StringField('Suggested Movie Name', validators=[DataRequired()])
+    description = TextAreaField('Write description of movie here: ', validators=[DataRequired()])
     genre = SelectField(
-        choices=[('action', 'Action'), ('comedy', 'Comedy'), ('horror', 'Horror'), ('romance', 'Romance')],
-        validators=[DataRequired()])
+        choices=[(1, 'Action'), (2, 'Comedy'), (3, 'Horror'), (4, 'Romance')],
+        validators=[DataRequired()]
+    )
 
     submit = SubmitField('Submit Movie')

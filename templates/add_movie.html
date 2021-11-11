@@ -1,0 +1,28 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as  wtf %}
+{% block title %}Popcorn{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form action class="form" role="form" method="post">
+            {{ form.csrf_token }}
+            <div class="jumbotron">
+                <h2 class="text-center">Add a Movie!</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ wtf.form_field(form.name) }}
+                </div>
+                <div class="col-md-6">
+                    {{ wtf.form_field(form.description) }}
+                </div>
+            </div>
+            {{ wtf.form_field(form.genre) }}
+            <div class='row'>
+                <div class="col text-center">
+                    {{ wtf.form_field(form.submit, class="btn btn-primary") }}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
