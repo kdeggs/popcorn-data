@@ -1,4 +1,8 @@
 Flask~=2.0.2
-WTForms~=2.1
 flask-bootstrap
+Flask-SQLAlchemy
+SQLAlchemy~=1.4.26
+Flask-WTF
+WTForms~=2.1
 gunicorn
+python-dotenv~=0.19.1
