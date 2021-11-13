@@ -5,7 +5,17 @@ new_movie = text(
     'VALUES (DEFAULT, :name, :description, :genre, 0)'
 )
 get_all_movies = text(
-    'SELECT * FROM movies'
+    'SELECT movies.name,movies.description,movies.votes,genre.type '
+    'FROM movies '
+    'INNER JOIN genre '
+    'ON genre.genre_id=movies.genre'
+)
+get_popular_movies = text(
+    'SELECT movies.name,movies.description,movies.votes,genre.type '
+    'FROM movies '
+    'INNER JOIN genre '
+    'ON genre.genre_id=movies.genre '
+    'ORDER BY movies.votes '
 )
 get_votes = text(
     'SELECT votes FROM movies '
