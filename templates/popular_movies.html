@@ -2,33 +2,41 @@
 {% block title %}Popular Movies{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="text-center">List of Popular Movies</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Votes</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for movie in query_results %}
-        <tr>
-        <td>{{ movie.name }}</td>
-        <td>{{ movie.description }}</td>
-        <td>{{ movie.type }}</td>
-        <td>{{ movie.votes }}</td>
-        <td><button type="button" class="btn btn-primary">Up Vote</button></td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-<div class="col text-center">
-    <a href="/">
-        <button type="button" class="btn btn-primary">Go Home</button>
-    </a>
-</div>
-</div>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">List of Popular Movies</h1>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Votes</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for movie in query_results %}
+                <tr>
+                    <td>
+                        <a href="/movie_details/{{ movie.movie_id }}">{{ movie.name }}</a>
+                    </td>
+                    <td>{{ movie.description }}</td>
+                    <td>{{ movie.type }}</td>
+                    <td>{{ movie.votes }}</td>
+                    <td>
+                        <form action="/add_vote/{{ movie.movie_id }}?template=popular_movies.html" method="post">
+                            <button type="submit" class="btn btn-primary">Up Vote</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="col text-center">
+            <a href="/">
+                <button type="button" class="btn btn-primary">Go Home</button>
+            </a>
+        </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,55 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Movie Details{% endblock %}
+
+{% block content %}
+    {% for movie in movie_query %}
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="text-center">{{ movie.name }}</h1>
+            </div>
+            <div class="description">
+                <h2><u>Description</u></h2>
+                <p>{{ movie.description }}</p>
+            </div>
+            <br>
+            <div class="other-information">
+                <h2><u>Other Information</u></h2>
+                <p>Genre: {{ movie.type }}</p>
+                <p>Vote Count: {{ movie.votes }}</p>
+            </div>
+            <br>
+            <div class="text-center">
+                <h2><u>Reviews</u></h2>
+            </div>
+            <br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Reviewer Name</th>
+                    <th scope="col">Review</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for review in reviews_query %}
+                    <tr>
+                        <td>{{ review.reviewer_name }}</td>
+                        <td>{{ review.review }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <div class="col text-center">
+                <a href="/">
+                    <button type="button" class="btn btn-secondary">Go Home</button>
+                </a>
+                <a href="/add_review/{{ movie.movie_id }}">
+                    <button type="button" class="btn btn-primary">Add a Review</button>
+                </a>
+                <form action="/delete_movie/{{ movie.movie_id }}" method="post">
+                    <button type="submit" class="btn btn-danger">Delete Movie</button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
