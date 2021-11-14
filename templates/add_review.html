@@ -1,28 +1,21 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as  wtf %}
-{% block title %}New Movie{% endblock %}
+{% block title %}New Review{% endblock %}
+
 
 {% block content %}
     <div class="container">
         <form action class="form" role="form" method="post">
             {{ form.csrf_token }}
             <div class="jumbotron">
-                <h2 class="text-center">Add a Movie!</h2>
+                <h2 class="text-center">Add a Review!</h2>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    {{ wtf.form_field(form.name) }}
-                </div>
-                <div class="col-md-6">
-                    {{ wtf.form_field(form.description) }}
-                </div>
+                {{ wtf.form_field(form.name) }}
+                {{ wtf.form_field(form.review) }}
             </div>
-            {{ wtf.form_field(form.genre) }}
             <div class='row'>
                 <div class="col text-center">
-                    <a href="/">
-                        <button type="button" class="btn btn-secondary">Go Back</button>
-                    </a>
                     {{ wtf.form_field(form.submit, class="btn btn-primary") }}
                 </div>
             </div>
